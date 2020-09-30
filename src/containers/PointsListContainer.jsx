@@ -3,6 +3,7 @@ import PointsList from '../components/PointsList';
 import {
   deletePoint,
   addPoint,
+  setPoints,
 } from '../actions';
 import { pointsSelector, mapCenterSelector } from '../selectors';
 
@@ -17,6 +18,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
+  setPoints,
   deletePoint,
   addPoint,
 };

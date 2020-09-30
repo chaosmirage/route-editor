@@ -4,11 +4,15 @@ import {
   addPoint,
   deletePoint,
   updatePoint,
+  setPoints,
 } from '../actions';
 
 const initialState = [];
 
 export default handleActions({
+  [setPoints](state, { payload: points }) {
+    return points;
+  },
   [addPoint](state, { payload: point }) {
     return [...state, point ];
   },

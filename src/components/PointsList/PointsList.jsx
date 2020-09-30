@@ -1,12 +1,21 @@
 import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
+import { Point } from './Point';
+
+const reorderList = (list, dragIndex, hoverIndex) => {
+  const clonedList = [...list];
+  const [deletedItem] = clonedList.splice(dragIndex, 1);
+  clonedList.splice(hoverIndex, 0, deletedItem);
+  return clonedList;
+};
 
 const PointsList = ({
   points,
   addPoint,
   center,
   deletePoint,
+  setPoints,
 }) => {
   const [pointName, changePointName] = useState('');
 
@@ -26,7 +35,26 @@ const PointsList = ({
     return () => {
       deletePoint(id);
     };
-  }, [deletePoint])
+  }, [deletePoint]);
+
+  const movePoint = useCallback((dragIndex, hoverIndex) => {
+    const reordered = reorderList(points, dragIndex, hoverIndex);
+
+    setPoints(reordered);
+  }, [points, setPoints]);
+
+  const renderPoint = (point, index) => {
+    return (
+      <Point
+        key={point.id}
+        index={index}
+        id={point.id}
+        text={point.name}
+        movePoint={movePoint}
+        onDelete={handleDeletePoint}
+      />
+    )
+  };
 
   const isPointNameEmpty = pointName === '';
 
@@ -38,19 +66,7 @@ const PointsList = ({
           Добавить
         </button>
       </form>
-      { points.map(({ name, id }) => {
-        return (
-          <div key={id}>
-            {name}
-            <button
-              type="button"
-              onClick={handleDeletePoint(id)}
-            >
-              Удалить
-            </button>
-          </div>
-        );
-      })}
+      { points.map((point, index) => renderPoint(point, index)) }
     </>
   );
 };
@@ -64,6 +80,7 @@ PointsList.propTypes = {
   center: PropTypes.arrayOf(PropTypes.number),
   addPoint: PropTypes.func.isRequired,
   deletePoint: PropTypes.func.isRequired,
+  setPoints: PropTypes.func.isRequired,
 };
 
 export default PointsList;
