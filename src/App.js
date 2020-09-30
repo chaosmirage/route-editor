@@ -1,22 +1,30 @@
 import React from 'react';
+import { Provider } from 'react-redux';
 import { YMaps } from 'react-yandex-maps';
+import configureStore from './configureStore';
 import './App.css';
-import Map from './Map';
-import PointsList from './PointsList';
+import {
+  PointsListContainer,
+  MapContainer,
+} from './containers';
 import { Layout, LeftColumn, RightColumn } from './App.styled';
+
+const store = configureStore();
 
 function App() {
   return (
-    <YMaps>
-      <Layout>
-        <LeftColumn>
-          <PointsList />
-        </LeftColumn>
-        <RightColumn >
-          <Map />
-        </RightColumn>
-      </Layout>
-    </YMaps>
+    <Provider store={store}>
+      <YMaps>
+        <Layout>
+          <LeftColumn>
+            <PointsListContainer />
+          </LeftColumn>
+          <RightColumn >
+            <MapContainer />
+          </RightColumn>
+        </Layout>
+      </YMaps>
+    </Provider>
   );
 }
 
