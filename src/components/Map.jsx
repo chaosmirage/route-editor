@@ -40,6 +40,7 @@ const Map = ({
       { points.map(({ coordinates, id, name }) => {
         return (
           <Placemark
+            data-test={`placemark-${id}`}
             key={id}
             geometry={coordinates}
             options={{ draggable: true }}

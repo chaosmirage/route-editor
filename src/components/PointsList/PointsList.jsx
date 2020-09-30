@@ -61,8 +61,16 @@ const PointsList = ({
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={pointName} onChange={handleChangePointName}/>
-        <button disabled={isPointNameEmpty}>
+        <input
+          data-test="point-name-input"
+          type="text"
+          value={pointName}
+          onChange={handleChangePointName}
+        />
+        <button
+          data-test="add-point-button"
+          disabled={isPointNameEmpty}
+        >
           Добавить
         </button>
       </form>
