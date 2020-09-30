@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [Описание задачи](https://dl.funbox.ru/qt-js.pdf)
 
-## Инструкция для запуска проекта
+## Run
 
 ### `yarn start`
 
@@ -13,3 +13,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
+
+## Test
+
+### `yarn run cy:run`
+
+Runs Cypress tests to completion. By default, cypress run will run all tests headlessly in the Electron browser.
