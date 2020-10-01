@@ -2,6 +2,12 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { Point } from './Point';
+import { ELEMENTS_NAMES } from '../../constants';
+
+const {
+  ADD_POINT_BUTTON,
+  POINT_NAME_INPUT,
+} = ELEMENTS_NAMES;
 
 const reorderList = (list, dragIndex, hoverIndex) => {
   const clonedList = [...list];
@@ -62,13 +68,13 @@ const PointsList = ({
     <>
       <form onSubmit={handleSubmit}>
         <input
-          data-test="point-name-input"
+          data-test={POINT_NAME_INPUT}
           type="text"
           value={pointName}
           onChange={handleChangePointName}
         />
         <button
-          data-test="add-point-button"
+          data-test={ADD_POINT_BUTTON}
           disabled={isPointNameEmpty}
         >
           Добавить

@@ -1,6 +1,12 @@
 import React, { useRef } from 'react';
 import { result } from 'lodash';
 import { useDrag, useDrop } from 'react-dnd';
+import { ELEMENTS_NAMES } from '../../constants';
+
+const {
+  POINTS_LIST_ITEM,
+  DELETE_LIST_ITEM_BUTTON,
+} = ELEMENTS_NAMES;
 
 const ItemTypes = {
   POINT: 'point',
@@ -64,9 +70,14 @@ export const Point = ({ id, text, index, movePoint, onDelete }) => {
   drag(drop(ref));
 
   return (
-    <div ref={ref} style={{ ...style, opacity }}>
+    <div
+      ref={ref}
+      style={{ ...style, opacity }}
+      data-test={`${POINTS_LIST_ITEM}-${id}`}
+    >
       {text}
       <button
+        data-test={`${DELETE_LIST_ITEM_BUTTON}-${id}`}
         type="button"
         onClick={onDelete(id)}
       >

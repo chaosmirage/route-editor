@@ -1,3 +1,12 @@
+import selectors from '../support/selectors';
+
+const {
+  addPointButtonSelector,
+  pointNameInputSelector,
+  pointsListItemSelector,
+  deletePointButtonSelector,
+} = selectors;
+
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -23,3 +32,28 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add('addItemToPointsList', (name) => {
+  cy
+    .get(pointNameInputSelector())
+    .type(name)
+    .should('have.value', name)
+    .get(addPointButtonSelector())
+    .click();
+});
+
+Cypress.Commands.add('pointsListContainsPoint', (name, id) => {
+  cy
+    .get(pointsListItemSelector(id))
+    .contains(name);
+});
+
+Cypress.Commands.add('deletePoint', (id) => {
+  cy
+      .get(deletePointButtonSelector(id))
+      .click();
+});
+
+Cypress.Commands.add('pointsListDoesNotContainPoint', (id) => {
+  cy.get(pointsListItemSelector(id)).should('not.exist');
+});

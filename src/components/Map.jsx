@@ -2,6 +2,11 @@ import React, { useCallback, useRef, } from 'react';
 import PropTypes from 'prop-types';
 import { Map as YandexMap, Placemark, Polyline } from 'react-yandex-maps';
 import { result } from 'lodash';
+import { ELEMENTS_NAMES } from '../constants';
+
+const {
+  MAP,
+} = ELEMENTS_NAMES;
 
 const Map = ({
   mapState,
@@ -31,6 +36,7 @@ const Map = ({
 
   return (
     <YandexMap
+      data-test={MAP}
       instanceRef={mapElement}
       state={mapState}
       style={{ width: "100%", height: "100%" }}
