@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { Point } from './Point';
+import { AddPointForm, PointsListContainer } from './PointsList.styled'
 import { ELEMENTS_NAMES } from '../../constants';
 
 const {
@@ -65,13 +66,14 @@ const PointsList = ({
   const isPointNameEmpty = pointName === '';
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <PointsListContainer>
+      <AddPointForm onSubmit={handleSubmit}>
         <input
           data-test={POINT_NAME_INPUT}
           type="text"
           value={pointName}
           onChange={handleChangePointName}
+          placeholder="Введите название точки"
         />
         <button
           data-test={ADD_POINT_BUTTON}
@@ -79,9 +81,9 @@ const PointsList = ({
         >
           Добавить
         </button>
-      </form>
+      </AddPointForm>
       { points.map((point, index) => renderPoint(point, index)) }
-    </>
+    </PointsListContainer>
   );
 };
 

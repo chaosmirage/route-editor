@@ -10,9 +10,12 @@ export const LeftColumn = styled.div`
   flex-grow: 1;
   flex-basis: 200px;
   min-width: 200px;
+  overflow-y: auto;
 `;
 
 export const RightColumn = styled.div`
   flex-grow: 2;
+  flex-shrink: 1;
   flex-basis: 400px;
+  min-width: 0;
 `;

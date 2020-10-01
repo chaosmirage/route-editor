@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { result } from 'lodash';
 import { useDrag, useDrop } from 'react-dnd';
+import { PointContainer, PointName } from './PointsList.styled';
 import { ELEMENTS_NAMES } from '../../constants';
 
 const {
@@ -10,14 +11,6 @@ const {
 
 const ItemTypes = {
   POINT: 'point',
-};
-
-const style = {
-  border: '1px dashed gray',
-  padding: '0.5rem 1rem',
-  marginBottom: '.5rem',
-  backgroundColor: 'white',
-  cursor: 'move',
 };
 
 export const Point = ({ id, text, index, movePoint, onDelete }) => {
@@ -66,16 +59,17 @@ export const Point = ({ id, text, index, movePoint, onDelete }) => {
     }),
   });
 
-  const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
 
   return (
-    <div
+    <PointContainer
       ref={ref}
-      style={{ ...style, opacity }}
+      isDragging={isDragging}
       data-test={`${POINTS_LIST_ITEM}-${id}`}
     >
-      {text}
+      <PointName title={text}>
+        {text}
+      </PointName>
       <button
         data-test={`${DELETE_LIST_ITEM_BUTTON}-${id}`}
         type="button"
@@ -83,6 +77,6 @@ export const Point = ({ id, text, index, movePoint, onDelete }) => {
       >
         Удалить
       </button>
-    </div>
+    </PointContainer>
   );
 };
